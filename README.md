@@ -25,13 +25,19 @@
 > pip install virtualenv
 ```
 
-* Install the necessary packages:
+* Create a virtual environment for the project and install the necessary packages:
 ```bash
+> virtualenv --no-site-packages --distribute env
 > source env/bin/activate
 (env)> pip install -r requirements.txt
-(env)> pip install -r requirements-test.txt
 ```
-If you want deactivate the virtualenv, use:
+
+* If `pg_config` error was raised, add the following line to `~/.bash_profile`:
+```bash
+export PATH=$PATH:/Applications/Postgres.app/Contents/Versions/[Your Postgres App Version]/bin
+```
+
+* If you want deactivate the virtualenv, use:
 ```bash
 (env)> deactivate
 ```
@@ -72,4 +78,3 @@ DATABASES = {
 ## Copyright and license
 
 Code and documentation copyright 2015 Team NA5G. Code released under [the MIT license](https://github.com/twbs/bootstrap/blob/master/LICENSE).
-
