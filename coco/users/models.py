@@ -16,7 +16,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-class Users(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = "user"
         verbose_name_plural = "users"
@@ -31,7 +31,7 @@ class Users(AbstractBaseUser, PermissionsMixin):
         max_length=20,
         null=False,
         blank=True)
-    
+
     email = models.EmailField(verbose_name="Email",
         max_length=255,
         unique=True,

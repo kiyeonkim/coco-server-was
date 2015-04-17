@@ -111,4 +111,7 @@ try:
     from local_settings import *
 except ImportError:
     pass
+
+# iamos
+AUTH_USER_MODEL = 'users.User'
     
