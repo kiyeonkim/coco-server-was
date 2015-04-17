@@ -1,39 +1,46 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseUserManager, Group
 from django import forms
-
-class Users(models.Model):
-	class Meta:
-		verbose_name = "user"
-		verbose_name_plural = "users"
-		swappable = "AUTH_USER_MODEL"
-
-	usename = models.CharField(verbose_name="id",
-		max_length=20,
-		help_text="id",
-		unique=True,
-		null=False,
-		db_index=True)
-
-	password = forms.CharField(widget=forms.PasswordInput())
-
-	displayname = models.CharField(verbose_name="nickname",
-		max_length=20,
-		null=False,
-		blank=True)
-	email = models.EmailField(verbose_name=u"Email",
-		max_length=255,
-		unique=True,
-		null=True)
-
-	is_active = models.BooleanField(verbose_name="is active",
-		default=False,
-		help_text="Is this user active?")
-
-	last_login = models.DateTimeField(verbose_name="last_login",
-		auto_now_add=True)
-	created_at = models.DateTimeField(verbose_name="created_at",
-		auto_now=True)
+from django.utils import timezone
 
 
+class UserManager(BaseUserManager):
+    def create_user(self, username, password, displayname, email , **extra_fields):
+        user = self.model(username=username, **extra_fields)
+        user.set_password(password)
+        user.displayname = displayname
+        user.email = email
+        user.is_active = True
+        user.date_joined = timezone.now()
+        user.save(using=self._db)
 
-# Create your models here.
+        return user
+
+class Users(AbstractBaseUser, PermissionsMixin):
+    class Meta:
+        verbose_name = "user"
+        verbose_name_plural = "users"
+        swappable = "AUTH_USER_MODEL"
+
+    username = models.CharField(verbose_name="username",
+                              max_length=30,
+                              unique=True,
+                              null=False)
+
+    displayname = models.CharField(verbose_name="nickname",
+        max_length=20,
+        null=False,
+        blank=True)
+    
+    email = models.EmailField(verbose_name="Email",
+        max_length=255,
+        unique=True,
+        null=True)
+
+    is_active = models.BooleanField(verbose_name="is active",
+                                    default=True,
+                                    help_text="Is this user active?")
+
+    date_joined = models.DateTimeField(default=timezone.now)
+
+    objects = UserManager()
