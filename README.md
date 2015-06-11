@@ -29,7 +29,7 @@
 ```bash
 > virtualenv --no-site-packages --distribute env
 > source env/bin/activate
-(env)> pip install -r requirements.txt
+(env)> pip install -r requirements/dev.txt
 ```
 
 * If `pg_config` error was raised, add the following line to `~/.bash_profile`:
@@ -65,9 +65,9 @@ DATABASES = {
 (env)> python ./manage.py runserver
 ```
 
-* **If you install/uninstall python packages, you have to update the requirements.txt**
+* **If you install/uninstall python packages, you have to update the requirements file**
 ```bash
-(env)> pip freeze > requirements.txt
+(env)> pip freeze > requirements/dev.txt
 ```
 
 ## Documentation
