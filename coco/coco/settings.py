@@ -37,6 +37,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'users',
+    'posts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -77,7 +79,7 @@ WSGI_APPLICATION = 'coco.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '[YOUR_DATABASE_NAME]',
+        'NAME': 'KimKiYeon',
         'USER': '',
         'PASSWORD': '',
         'HOST': 'localhost',
