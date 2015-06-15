@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}가입하기{% endblock %}
+
+{% block header %}
+  {% include 'users/account_header.html' %}
+{% endblock %}
+
+{% block content %}
+
+<form action="{% url 'sign_up' %}" method="post">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button id="signup_forms_submit">
+	<span>가입</span>
+    </button>
+</form>
+
+{% endblock %}

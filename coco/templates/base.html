@@ -1,0 +1,70 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+	<!-- meta -->
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="icon" type="image/png" href="{% static 'img/favicon.png' %}">
+	<!-- title -->
+	<title>{% block title %}{% endblock %}{% block head_title %}{% endblock %} | 한양중고장터</title>
+
+	<!-- css -->
+	<link rel="stylesheet" href="{% static 'css/core.css' %}">
+	{% block extra_links %}{% endblock %}
+
+	<!-- jquery -->
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+	<script type="text/javascript">
+	    function toast(sMessage) {
+	    console.log(sMessage)
+	      var container = $(document.createElement("div"));
+	      container.addClass("toast");
+
+	      var message = $(document.createElement("div"));
+	      message.addClass("message");
+	      message.text(sMessage);
+	      message.appendTo(container);
+
+	      container.appendTo(document.body);
+
+	      container.delay(100).fadeIn("slow", function() {
+	        $(this).delay(2000).fadeOut("slow", function() {
+  	          $(this).remove();
+	        });
+	      });
+	    }
+	</script>
+	{% block extra_scripts %}{% endblock %}
+    </head>
+    <body class="{% block body_class %}{% endblock %}">
+
+	{% block header %}{% endblock %}
+
+	<!-- BEGIN content-->
+	<div id="content">
+	    <div class="wrapper">
+		{% if messages %}
+		<ul class="notifications">
+		    {% for message in messages %}
+		    <script type="text/javascript">
+			$(document).ready(function(){toast("{{ message }}");});
+		    </script>
+		    <script type="text/javascript">
+			console.log("HI")
+		    </script>
+		    {% endfor %}
+		</ul>
+		{% endif %}
+
+		{% block content-header %}
+		{% endblock %}
+
+		{% block content %}
+		{% endblock %}
+
+	    </div>
+	</div>
+	<!-- END content-->
+    </body>
+</html>
