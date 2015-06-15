@@ -8,3 +8,11 @@ DATABASES = {
       'PORT': '',
   }
 }
+
+# STATIC_ROOT setings for selenium live server test
+# TODO: nginx server setting
+
+import os
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+STATIC_ROOT = os.path.join(BASE_DIR, 'tmp')
