@@ -70,6 +70,13 @@ DATABASES = {
 (env)> pip freeze > requirements/dev.txt
 ```
 
+* For selenium:
+```bash
+> virtualenv --no-site-packages --distribute tenv
+> source tenv/bin/activate
+(tenv)> pip freeze > requirements/test.txt
+```
+
 ## Documentation
 
 * [Meeting minutes](https://github.com/NA5G/coco-doc-meeting-minutes)
