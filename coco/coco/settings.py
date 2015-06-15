@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -38,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users',
+    'dashboard',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -56,7 +56,9 @@ ROOT_URLCONF = 'coco.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ 
+            'templates' 
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -105,12 +107,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/usr/share/nginx/www/static'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+AUTH_USER_MODEL = 'users.User'
+LOGIN_URL = '/login'
+LOGIN_REDIRECT_URL = '/dashboard'
 
 # Import the local settings
 try:
     from local_settings import *
 except ImportError:
     pass
-
-# AUTH_USER_MODEL = 'users.User'
-    
